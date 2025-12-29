@@ -5,7 +5,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -59,7 +58,7 @@ public class AuthController {
 
         String userId = userRepository.getId(request.getUsername());
         String token = jwtService.generateToken(request.getUsername(), userId);
-        AuthResponse response = new AuthResponse(token,userId);
+        AuthResponse response = new AuthResponse(token,userId,request.getUsername());
         System.out.println(request.getUsername() + " logged in successfully.");
         return response;
 

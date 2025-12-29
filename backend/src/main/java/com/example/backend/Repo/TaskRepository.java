@@ -61,4 +61,17 @@ public class TaskRepository {
         return tasks;
     }
 
+    public void changeStatus(String taskId) { // Could maybe condense this into one sql query later
+        String query = "SELECT status FROM " + tableName + " WHERE id = ?";
+        Integer status = template.queryForObject(query,Integer.class,taskId);
+        status = (status == 1) ? 0 : 1;
+        query = "UPDATE " + tableName + " SET status = ? WHERE id = ?";
+        template.update(query,status,taskId);
+    }
+
+    public void delete(String taskId) {
+        String query = "DELETE FROM " + tableName + " WHERE id = ?";
+        template.update(query, taskId);
+    }
+
 }

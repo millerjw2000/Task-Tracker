@@ -13,8 +13,8 @@ CREATE table tasks (
 
     id VARCHAR(25) PRIMARY KEY,
     userId VARCHAR(25),
-    creationTime VARCHAR(30),
-    dueTime VARCHAR(30),
+    creationTime INTEGER,
+    dueTime INTEGER,
     description VARCHAR(500),
     status INTEGER,
     FOREIGN KEY(userId) REFERENCES users(id)

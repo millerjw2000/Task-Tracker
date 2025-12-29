@@ -4,16 +4,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 
-import org.springframework.context.ApplicationContext;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.example.backend.Repo.*;
+import com.example.backend.Repo.TaskRepository;
 import com.example.backend.Model.Task;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -26,7 +24,9 @@ public class TaskController {
         this.taskRepository = taskRepository;
     }
 
-    // TODO: endpoints for adding a task, retrieving tasks, changing task status, deleting a task //
+    // TODO: //
+    // make sure person task being deleted/changed belongs to person sending request // 
+    // send proper codes back in response //
 
     @PostMapping("/tasks/enter")
     public void enterTask(@RequestBody TaskRequest request, Authentication auth) {
@@ -53,9 +53,31 @@ public class TaskController {
 
     @GetMapping("/tasks/getAll")
     public TaskResponse getAll(Authentication auth) {
+        
         String userId = (String) auth.getPrincipal();
         ArrayList<Task> tasks = taskRepository.getAll(userId);
         return new TaskResponse(tasks);
+
+    }
+
+    @PostMapping("/tasks/changeStatus")
+    public TaskResponse changeStatus(@RequestBody ChangeTaskRequest request, Authentication auth) {
+
+        String userId = (String) auth.getPrincipal();
+        taskRepository.changeStatus(request.getTaskId());
+        ArrayList<Task> tasks = taskRepository.getAll(userId);
+        return new TaskResponse(tasks);
+
+    }
+
+    @PostMapping("/tasks/deleteTask")
+    public TaskResponse deleteTask(@RequestBody ChangeTaskRequest request, Authentication auth) {
+
+        String userId = (String) auth.getPrincipal();
+        taskRepository.delete(request.getTaskId());
+        ArrayList<Task> tasks = taskRepository.getAll(userId);
+        return new TaskResponse(tasks);
+
     }
 
 }
