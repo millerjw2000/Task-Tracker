@@ -1,27 +1,24 @@
 import './App.css';
-import React, {useEffect, useState} from 'react'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { Home } from "./pages/home"
+import { Register } from "./pages/register"
+import { User } from "./pages/user"
 
-import axios from 'axios';
 
 function App() {
 
-  const [message, setMessage] = useState('Hello World Again!')
-
-  useEffect(() => {
-
-    axios.get('http://localhost:8080/test')
-    .then((response) => {
-        setMessage(response.data)
-    })
-  
-  },[])
-
   return (
-    <>
-    Hello World!
-    {message}
-    </>
-  );
+
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/register" element={<Register/>}/>
+        <Route path="/user" element={<User/>}/>
+      </Routes>
+    </Router>
+
+  )
+
 }
 
 export default App;

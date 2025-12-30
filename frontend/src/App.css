@@ -1,0 +1,52 @@
+
+:root {
+    --primary-light: rgb(228, 237, 241);
+    --secondary-light: white;
+    --tertiary-light: rgb(202, 202, 202);
+}
+
+html, body {
+    font-family: "Work Sans", sans-serif;
+    background-color: var(--primary-light);
+    display: flex;
+    justify-content: center;
+}
+
+.form {
+    background-color: var(--secondary-light);
+    margin-top: 10rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    text-align: center;
+    border: 2px solid var(--tertiary-light);
+}
+
+.form input {
+    width: 20rem;
+    margin: .25rem;
+    height: 2rem;
+    background-color: var(--primary-light);
+    border-style: none;
+    border-radius: .25rem;
+}
+
+.form a {
+    color: rgb(0, 153, 255);
+}
+
+.form a:hover {
+    color: rgb(21, 18, 202);
+}
+
+.form input {
+    
+}
+
+.submit input{
+    background-color: var(--tertiary-light);
+    border-style: none;
+}
+
+.submit input:hover {
+
+}

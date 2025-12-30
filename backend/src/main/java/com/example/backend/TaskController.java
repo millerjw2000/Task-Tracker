@@ -29,7 +29,7 @@ public class TaskController {
     // send proper codes back in response //
 
     @PostMapping("/tasks/enter")
-    public void enterTask(@RequestBody TaskRequest request, Authentication auth) {
+    public TaskResponse enterTask(@RequestBody TaskRequest request, Authentication auth) {
         
         Integer dueTime = request.getDueTime();
         String description = request.getDescription();
@@ -49,6 +49,9 @@ public class TaskController {
         taskRepository.enter(task);
         System.out.println("Task created (" + taskId + ")");
 
+        ArrayList<Task> tasks = taskRepository.getAll(userId);
+        return new TaskResponse(tasks);
+
     }
 
     @GetMapping("/tasks/getAll")
@@ -56,6 +59,7 @@ public class TaskController {
         
         String userId = (String) auth.getPrincipal();
         ArrayList<Task> tasks = taskRepository.getAll(userId);
+        System.out.println("hello!");
         return new TaskResponse(tasks);
 
     }
@@ -70,7 +74,7 @@ public class TaskController {
 
     }
 
-    @PostMapping("/tasks/deleteTask")
+    @PostMapping("/tasks/delete")
     public TaskResponse deleteTask(@RequestBody ChangeTaskRequest request, Authentication auth) {
 
         String userId = (String) auth.getPrincipal();
