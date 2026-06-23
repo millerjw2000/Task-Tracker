@@ -32,7 +32,8 @@ export function Home() {
         }
         
         
-        const res = await axios.post(`http://${API_BASE_URL}/auth/login`,
+        
+        const res = await axios.post(`http://localhost:8080/auth/login`,
             {
 
                 username: name,

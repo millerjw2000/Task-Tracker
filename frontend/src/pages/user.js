@@ -62,7 +62,7 @@ export function User() {
             'Authorization' : `Bearer ${token}`
         }
 
-        const res = axios.post(`http://${API_BASE_URL}/tasks/changeStatus`,
+        const res = axios.post(`http://localhost:8080/tasks/changeStatus`,
             {
                 taskId: id,
             }, { headers }
@@ -92,7 +92,7 @@ export function User() {
             'Authorization' : `Bearer ${token}`
         }
 
-        const res = axios.post(`http://${API_BASE_URL}/tasks/enter`,
+        const res = axios.post(`http://localhost:8080/tasks/enter`,
             {
                 description: enter_desc,
                 dueTime: dateToUnix(enter_due_time),
@@ -131,7 +131,7 @@ export function User() {
             'Authorization' : `Bearer ${token}`
         }
 
-        const res = axios.get(`http://${API_BASE_URL}/tasks/getAll`, { headers })
+        const res = axios.get(`http://localhost:8080/tasks/getAll`, { headers })
             .then(res => {
 
                 if (res.status == 200) {

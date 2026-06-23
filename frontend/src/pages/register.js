@@ -40,7 +40,7 @@ export function Register() {
             return null
         }
         
-        const res = await axios.post(`http://${API_BASE_URL}/auth/register`,
+        const res = await axios.post(`http://localhost:8080/auth/register`,
             {
 
                 username: name,
